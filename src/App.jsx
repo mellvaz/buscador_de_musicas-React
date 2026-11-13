@@ -128,10 +128,14 @@ function App() {
               {musicas.map((musica) => (
                 <div key={musica.trackId} className="music-card">
                   <div className="cover-wrapper">
-                    <img
+                   <img
                       src={musica.artworkUrl100 ? musica.artworkUrl100.replace('100x100bb', '600x600bb') : ''}
                       alt={musica.trackName}
                       className="album-cover"
+                      onError={(e) => {
+                      e.target.onerror = null; // Evita loop infinito
+                      e.target.src = musica.artworkUrl100 || 'https://placehold.co/600x600/191430/a855f7?text=BeatPurple';
+                      }}
                     />
                   </div>
 
